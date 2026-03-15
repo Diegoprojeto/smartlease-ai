@@ -105,8 +105,7 @@ class UrlPayload(BaseModel):
     url: str
 
 @app.post("/analisar-url")
-async def analisar_url(payload: UrlPayload):
-    async with httpx.AsyncClient(timeout=20.0) as client:
+        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
         try:
             resp = await client.get(payload.url)
             resp.raise_for_status()
